@@ -6,6 +6,8 @@ public interface IAppointmentRepository
 {
     Task AddAsync(Appointment appointment);
     Task<Appointment?> GetByIdAsync(int id);
-    Task<IEnumerable<Appointment>> FindByDateRangeAsync(DateTime startDate, DateTime endDate);
     Task UpdateAsync(Appointment appointment);
+    Task<int> CountAsync();
+    Task<(IEnumerable<Appointment> Appointments, int TotalCount)> GetAllAsync(int pageNumber, int pageSize);
+    Task<(IEnumerable<Appointment> Appointments, int TotalCount)> FindByDateRangeAsync(DateTime startDate, DateTime endDate, int pageNumber, int pageSize);
 }

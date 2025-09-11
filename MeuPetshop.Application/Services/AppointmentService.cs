@@ -7,6 +7,7 @@ using MeuPetShop.Domain.Interfaces.IAppointment;
 using MeuPetShop.Domain.Interfaces.IClients;
 using MeuPetShop.Domain.Interfaces.IPets;
 using MeuPetShop.Domain.Interfaces.IService;
+using MeuPetShop.Domain.Shared;
 
 namespace MeuPetshop.Application.Services;
 
@@ -21,78 +22,129 @@ public class AppointmentService : IAppointmentService
         IAppointmentRepository appointmentRepository,
         IClientRepository clientRepository,
         IPetRepository petRepository,
-        IServiceRepository serviceRepository
-    )
+        IServiceRepository serviceRepository)
     {
         _appointmentRepository = appointmentRepository;
         _clientRepository = clientRepository;
         _petRepository = petRepository;
         _serviceRepository = serviceRepository;
     }
-    public async Task<AppointmentDto?> CreateAppointmentAsync(CreateAppointmentDto appointmentDto)
+
+    public async Task<PagedApiResponse<AppointmentDto>> FindAppointmentsByDateRangeAsync(DateTime startDate, DateTime endDate, int pageNumber, int pageSize)
     {
-        var client = await _clientRepository.GetByIdAsync(appointmentDto.ClientId);
-        var pet = await _petRepository.GetByIdAsync(appointmentDto.PetId);
-        var service = await _serviceRepository.GetByIdAsync(appointmentDto.ServiceId);
+        var (appointments, totalCount) = await _appointmentRepository.FindByDateRangeAsync(startDate.ToUniversalTime(), endDate.ToUniversalTime(), pageNumber, pageSize);
+        var appointmentDtos = appointments.Select(MapAppointmentToDto);
 
-        if (client == null || pet == null || service == null)
+        return new PagedApiResponse<AppointmentDto>
         {
-            throw new InvalidOperationException("Invalid client, pet or service");
-        }
-        
-        if (pet.ClientId != client.Id)
-        {
-            throw new InvalidOperationException("O pet informado não pertence ao cliente informado.");
-        }
-
-        var newAppointment = new Appointment
-        {
-            ClientId = client.Id,
-            PetId = pet.Id,
-            ServiceId = service.Id,
-            AppointmentDateTime = appointmentDto.AppointmentDateTime,
-            Notes = appointmentDto.Notes,
-            AppointmentStatus = AppointmentStatus.Scheduled
+            Data = appointmentDtos,
+            Pagination = new PaginationData
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+            }
         };
-        
-        await _appointmentRepository.AddAsync(newAppointment);
-        var createdAppointment = await _appointmentRepository.GetByIdAsync(newAppointment.Id);
-        return createdAppointment == null ? null : MapAppointmentToDto(createdAppointment);
+    }
+    
+    // Todos os métodos abaixo foram atualizados para retornar ApiResponse<T>
+    public async Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto)
+    {
+        try
+        {
+            var client = await _clientRepository.GetByIdAsync(appointmentDto.ClientId);
+            var pet = await _petRepository.GetByIdAsync(appointmentDto.PetId);
+            var service = await _serviceRepository.GetByIdAsync(appointmentDto.ServiceId);
+
+            if (client == null || pet == null || service == null)
+            {
+                return new ApiResponse<AppointmentDto> { Success = false, Message = "Cliente, Pet ou Serviço não encontrado." };
+            }
+            if (pet.ClientId != client.Id)
+            {
+                return new ApiResponse<AppointmentDto> { Success = false, Message = "O pet informado não pertence ao cliente informado." };
+            }
+            
+            var newAppointment = new Appointment
+            {
+                ClientId = appointmentDto.ClientId,
+                PetId = appointmentDto.PetId,
+                ServiceId = appointmentDto.ServiceId,
+                AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime(),
+                Notes = appointmentDto.Notes,
+                AppointmentStatus = AppointmentStatus.Scheduled
+            };
+
+            await _appointmentRepository.AddAsync(newAppointment);
+            var createdAppointment = await _appointmentRepository.GetByIdAsync(newAppointment.Id);
+            
+            return new ApiResponse<AppointmentDto> { Data = MapAppointmentToDto(createdAppointment!) };
+        }
+        catch (Exception ex)
+        {
+            return new ApiResponse<AppointmentDto> { Success = false, Message = "Ocorreu um erro ao criar o agendamento.", Errors = new List<string> { ex.Message } };
+        }
     }
 
-    public async Task<AppointmentDto?> GetAppointmentByIdAsync(int id)
+    public async Task<ApiResponse<AppointmentDto>> GetAppointmentByIdAsync(int id)
     {
         var appointment = await _appointmentRepository.GetByIdAsync(id);
-        return appointment == null ? null : MapAppointmentToDto(appointment);
+        if (appointment == null)
+        {
+            return new ApiResponse<AppointmentDto> { Success = false, Message = $"Agendamento com ID {id} não encontrado." };
+        }
+        return new ApiResponse<AppointmentDto> { Data = MapAppointmentToDto(appointment) };
     }
-
-    public async Task<IEnumerable<AppointmentDto>> FindAppointmentsByDateRangeAsync(DateTime startDate, DateTime endDate)
+    
+    public async Task<ApiResponse<AppointmentDto>> UpdateAppointmentAsync(int id, UpdateAppointmentDto appointmentDto)
     {
-        var appointments = await _appointmentRepository.FindByDateRangeAsync(startDate, endDate);
-        return appointments.Select(MapAppointmentToDto);
+        var appointmentToUpdate = await _appointmentRepository.GetByIdAsync(id);
+        if (appointmentToUpdate == null)
+        {
+            return new ApiResponse<AppointmentDto> { Success = false, Message = $"Agendamento com ID {id} não encontrado." };
+        }
+
+        appointmentToUpdate.AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime();
+        appointmentToUpdate.AppointmentStatus = appointmentDto.Status;
+        appointmentToUpdate.Notes = appointmentDto.Notes;
+
+        await _appointmentRepository.UpdateAsync(appointmentToUpdate);
+
+        return new ApiResponse<AppointmentDto> { Data = MapAppointmentToDto(appointmentToUpdate) };
     }
-
-    public async Task<AppointmentDto?> UpdateAppointmentAsync(int id, UpdateAppointmentDto appointmentDto)
+    
+    public async Task<ApiResponse<AppointmentDto>> CancelAppointmentAsync(int id)
     {
-        var appointment = await _appointmentRepository.GetByIdAsync(id);
-        if (appointment == null) return null;
+        var appointmentToCancel = await _appointmentRepository.GetByIdAsync(id);
+        if (appointmentToCancel == null)
+        {
+            return new ApiResponse<AppointmentDto> { Success = false, Message = $"Agendamento com ID {id} não encontrado." };
+        }
+
+        appointmentToCancel.AppointmentStatus = AppointmentStatus.Canceled;
+        await _appointmentRepository.UpdateAsync(appointmentToCancel);
         
-        
-        appointment.AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime();
-        appointment.AppointmentStatus = appointmentDto.Status;
-        appointment.Notes = appointmentDto.Notes;
-        
-        await _appointmentRepository.UpdateAsync(appointment);
-        return MapAppointmentToDto(appointment);
+        return new ApiResponse<AppointmentDto> { Data = MapAppointmentToDto(appointmentToCancel) };
     }
+    
 
-    public async Task<AppointmentDto?> CancelAppointmentAsync(int id)
+    public async Task<PagedApiResponse<AppointmentDto>> GetAllAppointmentsAsync(int pageNumber, int pageSize)
     {
-        var appointment = await _appointmentRepository.GetByIdAsync(id);
-        if (appointment == null) return null;
-        appointment.AppointmentStatus = AppointmentStatus.Canceled;
-        await _appointmentRepository.UpdateAsync(appointment);
-        return MapAppointmentToDto(appointment);
+        var (appointments, totalCount) = await _appointmentRepository.GetAllAsync(pageNumber, pageSize);
+        var appointmentDtos = appointments.Select(MapAppointmentToDto);
+
+        return new PagedApiResponse<AppointmentDto>
+        {
+            Data = appointmentDtos,
+            Pagination = new PaginationData
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+            }
+        };
     }
     
     private AppointmentDto MapAppointmentToDto(Appointment appointment)
@@ -103,4 +155,5 @@ public class AppointmentService : IAppointmentService
 
         return new AppointmentDto(appointment.Id, appointment.AppointmentDateTime, appointment.AppointmentStatus, appointment.Notes, clientDto, petDto, serviceDto);
     }
+    
 }

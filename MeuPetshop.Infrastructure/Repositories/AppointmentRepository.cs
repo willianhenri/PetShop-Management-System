@@ -13,6 +13,27 @@ public class AppointmentRepository : IAppointmentRepository
     {
         _context = context;
     }
+
+    public async Task<(IEnumerable<Appointment> Appointments, int TotalCount)> FindByDateRangeAsync(DateTime startDate, DateTime endDate, int pageNumber, int pageSize)
+    {
+        var query = _context.Appointments
+            .Where(a => a.AppointmentDateTime >= startDate && a.AppointmentDateTime <= endDate);
+
+        var totalCount = await query.CountAsync();
+
+        var appointments = await query
+            .Include(a => a.Client)
+            .Include(a => a.Pet)
+            .Include(a => a.Service)
+            .OrderBy(a => a.AppointmentDateTime)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+            
+        return (appointments, totalCount);
+    }
+    
+    
     public async Task AddAsync(Appointment appointment)
     {
         await _context.Appointments.AddAsync(appointment);
@@ -28,14 +49,25 @@ public class AppointmentRepository : IAppointmentRepository
             .FirstOrDefaultAsync(a => a.Id == id);
     }
 
-    public async Task<IEnumerable<Appointment>> FindByDateRangeAsync(DateTime startDate, DateTime endDate)
+    public async Task<int> CountAsync()
     {
-        return await _context.Appointments
+        return await _context.Appointments.CountAsync();
+    }
+
+    public async Task<(IEnumerable<Appointment> Appointments, int TotalCount)> GetAllAsync(int pageNumber, int pageSize)
+    {
+        var totalCount = await _context.Appointments.CountAsync();
+
+        var appointments = await _context.Appointments
             .Include(a => a.Client)
             .Include(a => a.Pet)
             .Include(a => a.Service)
-            .Where(a => a.AppointmentDateTime >= startDate && a.AppointmentDateTime <= endDate)
+            .OrderByDescending(a => a.AppointmentDateTime)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+        
+        return (appointments, totalCount);
     }
 
     public async Task UpdateAsync(Appointment appointment)
