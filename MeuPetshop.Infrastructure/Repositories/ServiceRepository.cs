@@ -26,9 +26,15 @@ public class ServiceRepository : IServiceRepository
         
     }
 
-    public async Task<IEnumerable<Service>> GetAllAsync()
+    public async Task<(IEnumerable<Service> Services, int TotalCount)> GetAllAsync(int pageNumber, int pageSize)
     {
-        return await _context.Services.ToListAsync();
+        var totalCount = await _context.Services.CountAsync();
+        var services = await _context.Services
+            .OrderBy(s => s.Name)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (services, totalCount);
     }
 
     public async Task UpdateAsync(Service service)

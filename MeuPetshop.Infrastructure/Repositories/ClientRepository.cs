@@ -24,6 +24,16 @@ public class ClientRepository : IClientRepository
         return await _context.Clients.Include(c => c.Pets).FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<(IEnumerable<Client> Clients, int TotalCount)> GetAllAsync(int pageNumber, int pageSize)
+    {
+        var totalCount = await _context.Clients.CountAsync();
+        var clientsOnPage = await _context.Clients
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (clientsOnPage, totalCount);
+    }
+
     public async Task<IEnumerable<Client>> GetAllAsync()
     {
         return await _context.Clients.Include(c => c.Pets).ToListAsync();

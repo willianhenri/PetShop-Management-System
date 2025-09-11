@@ -1,6 +1,7 @@
 ﻿using MeuPetShop.Domain.Dtos.ServiceDtos;
 using MeuPetShop.Domain.Entities;
 using MeuPetShop.Domain.Interfaces.IService;
+using MeuPetShop.Domain.Shared;
 
 namespace MeuPetshop.Application.Services;
 
@@ -33,11 +34,25 @@ public class ServiceService : IServiceService
         return MapServiceToDto(service);
     }
 
-    public async Task<IEnumerable<ServiceDto>> GetAllServicesAsync()
+    public async Task<PagedApiResponse<ServiceDto>> GetAllServicesAsync(int pageNumber, int pageSize)
     {
-        var services = await _repository.GetAllAsync();
-        return services.Select(MapServiceToDto);
+        var (services, totalCount) = await _repository.GetAllAsync(pageNumber, pageSize);
+        var serviceDtos = services.Select(MapServiceToDto);
+
+        var response = new PagedApiResponse<ServiceDto>
+        {
+            Data = serviceDtos,
+            Pagination = new PaginationData
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+            }
+        };
+        return response;
     }
+
 
     public async Task<ServiceDto?> UpdateServiceAsync(int id, UpdateServiceDto serviceDto)
     {

@@ -2,6 +2,7 @@
 using MeuPetShop.Domain.Dtos.PetDtos;
 using MeuPetShop.Domain.Entities;
 using MeuPetShop.Domain.Interfaces.IClients;
+using MeuPetShop.Domain.Shared;
 
 namespace MeuPetshop.Application.Services;
 
@@ -41,11 +42,25 @@ public class ClientServices : IClientService
         return MapClientToDto(client);
     }
 
-    public async Task<IEnumerable<ClientDto>> GetAllClientsAsync()
+    public async Task<PagedApiResponse<ClientDto>> GetAllClientsAsync(int pageNumber, int pageSize)
     {
-        var clients = await _clientRepository.GetAllAsync();
-        return clients.Select(MapClientToDto);
+        var (clients, totalCount) = await _clientRepository.GetAllAsync(pageNumber, pageSize);
+        var clientDtos = clients.Select(MapClientToDto);
+        
+        var response = new PagedApiResponse<ClientDto>
+        {
+            Data = clientDtos,
+            Pagination = new PaginationData
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+            }
+        };
+        return response;
     }
+
 
     public async Task<ClientDto?> UpdateClientAsync(int id, UpdateClientDto clientDto)
     {

@@ -1,5 +1,6 @@
 ﻿using MeuPetShop.Domain.Dtos.ServiceDtos;
 using MeuPetShop.Domain.Interfaces.IService;
+using MeuPetShop.Domain.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +19,10 @@ public class ServicesController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ServiceDto>>> GetAllServices()
+    public async Task<ActionResult<PagedApiResponse<ServiceDto>>> GetAllServices([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var services = await _serviceService.GetAllServicesAsync();
-        return Ok(services);
+        var response = await _serviceService.GetAllServicesAsync(pageNumber, pageSize);
+        return Ok(response);
     }
 
     [HttpGet("{id}", Name = "GetServiceById")]

@@ -1,6 +1,7 @@
 ﻿using MeuPetShop.Domain.Dtos.ClientDtos;
 using MeuPetShop.Domain.Interfaces.IClients;
 using MeuPetShop.Domain.Interfaces.IProducts;
+using MeuPetShop.Domain.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,10 +20,10 @@ public class ClientsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ClientDto>>> GetAllClients()
+    public async Task<ActionResult<PagedApiResponse<ClientDto>>> GetAllClients([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var clients = await _clientService.GetAllClientsAsync();
-        return Ok(clients);
+        var response = await _clientService.GetAllClientsAsync(pageNumber, pageSize);
+        return Ok(response);
     }
 
     [HttpGet("{id:int}")]
