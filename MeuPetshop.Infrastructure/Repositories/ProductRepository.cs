@@ -14,7 +14,7 @@ public class ProductRepository : IProductRepository
     {
         _context = context;
     }
-    
+
     public async Task AddAsync(Product product)
     {
         await _context.Products.AddAsync(product);
@@ -26,21 +26,9 @@ public class ProductRepository : IProductRepository
         return await _context.Products.FindAsync(id);
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
-    {
-        return await _context.Products.ToListAsync();
-    }
-
-    public async Task<IEnumerable<Product>> GetByStockQuantityAsync(int stockQuantity)
-    {
-        return await _context.Products
-            .Where(p => p.StockQuantity == stockQuantity)
-            .ToListAsync();
-    }
-
     public async Task<Product?> GetByNameAsync(string name)
     {
-        return await _context.Products.FirstOrDefaultAsync(p => p.Name == name);
+        return await _context.Products.FirstOrDefaultAsync(p => p.Name.ToLower() == name.ToLower());
     }
 
     public async Task UpdateAsync(Product product)
@@ -54,33 +42,30 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
     }
-    
-    public async Task<int> CountAsync()
-    {
-        return await _context.Products.CountAsync();
-    }
 
-    public async Task<IEnumerable<Product>> GetAllPagedAsync(int pageNumber, int pageSize)
+    public async Task<(IEnumerable<Product> Products, int TotalCount)> GetAllAsync(int pageNumber, int pageSize)
     {
-        return await _context.Products
+        var totalCount = await _context.Products.CountAsync();
+        var products = await _context.Products
+            .OrderBy(p => p.Name)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
+        return (products, totalCount);
     }
-    
+
     public async Task<(IEnumerable<Product> Products, int TotalCount)> SearchByNameAsync(string searchTerm, int pageNumber, int pageSize)
     {
         var searchTermLower = searchTerm.ToLower();
-        
         var query = _context.Products.Where(p => p.Name.ToLower().Contains(searchTermLower));
-
+        
         var totalCount = await query.CountAsync();
-
-        var products = await query.Skip((pageNumber - 1) * pageSize)
+        var products = await query
+            .OrderBy(p => p.Name)
+            .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
-
-
+            
         return (products, totalCount);
     }
 }

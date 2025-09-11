@@ -1,12 +1,8 @@
-﻿using MeuPetshop.Domain.Dtos;
-using MeuPetshop.Domain.Dtos.ProductDtos;
-using MeuPetShop.Domain.Entities;
-using MeuPetShop.Domain.Interfaces;
-using MeuPetShop.Domain.Interfaces.IProducts;
-using MeuPetShop.Domain.Shared;
+﻿using MeuPetshop.Domain.Dtos.ProductDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MeuPetShop.Domain.Interfaces.IProducts;
+using MeuPetShop.Domain.Shared;
 
 namespace MeuPetshop.Api.Controllers;
 
@@ -23,67 +19,70 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PagedApiResponse<ProductDto>>> GetAllPagedAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    public async Task<ActionResult<PagedApiResponse<ProductDto>>> GetAllProducts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         var response = await _productService.GetAllProductsAsync(pageNumber, pageSize);
         return Ok(response);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<ProductDto>> GetProdutoByIdAsync(int id)
-    {
-        var produto = await _productService.GetProductByIdAsync(id);
-        if(produto == null) return NotFound();
-        return Ok(produto);
-    }
-
     [HttpGet("search")]
-    public async Task<ActionResult<PagedApiResponse<ProductDto>>> SearchProducts(
-        [FromQuery] string term, 
-        [FromQuery] int pageNumber = 1, 
-        [FromQuery] int pageSize = 10)
+    public async Task<ActionResult<PagedApiResponse<ProductDto>>> SearchProducts([FromQuery] string term, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         if (string.IsNullOrWhiteSpace(term))
         {
-            return Ok(new PagedApiResponse<ProductDto>
-            {
-                Data = new List<ProductDto>(), // Lista vazia
-                Pagination = new PaginationData { TotalCount = 0, TotalPages = 0, CurrentPage = 1, PageSize = pageSize }
-            });
+            return await GetAllProducts(pageNumber, pageSize);
         }
-
         var response = await _productService.SearchProductsByNameAsync(term, pageNumber, pageSize);
         return Ok(response);
     }
+    
+    [HttpGet("{id}", Name = "GetProductById")]
+    public async Task<ActionResult<ProductDto>> GetProductById(int id)
+    {
+        var product = await _productService.GetProductByIdAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return Ok(product);
+    }
 
     [HttpPost]
-    public async Task<ActionResult<ProductDto>> PostProdutos(CreateProductDto product)
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] CreateProductDto productDto)
     {
         try
         {
-            var novoProduto = await _productService.CreateProductAsync(product);
-            return Ok(novoProduto);
+            var newProduct = await _productService.CreateProductAsync(productDto);
+            return CreatedAtRoute("GetProductById", new { id = newProduct.Id }, newProduct);
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(ex.Message);
+            return Conflict(new { Message = ex.Message });
         }
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<ActionResult<ProductDto>> PutProdutoAsync(int id, UpdateProductDto productDto)
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<ProductDto>> UpdateProduct(int id, [FromBody] UpdateProductDto productDto)
     {
-        var produtoAtualizado = await _productService.UpdateProductAsync(id, productDto);
-        if(produtoAtualizado == null) return NotFound();
-        return Ok(produtoAtualizado);
+        var updatedProduct = await _productService.UpdateProductAsync(id, productDto);
+        if (updatedProduct == null)
+        {
+            return NotFound();
+        }
+        return Ok(updatedProduct);
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult<bool>> DeleteProdutoAsync(int id)
+    public async Task<IActionResult> DeleteProduct(int id)
     {
-        var produtoDeletado = await _productService.DeleteProductAsync(id);
-        if(!produtoDeletado) return NotFound();
+        var success = await _productService.DeleteProductAsync(id);
+        if (!success)
+        {
+            return NotFound();
+        }
         return NoContent();
     }
 }
