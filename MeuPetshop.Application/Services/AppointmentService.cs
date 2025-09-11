@@ -73,7 +73,7 @@ public class AppointmentService : IAppointmentService
                 ServiceId = appointmentDto.ServiceId,
                 AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime(),
                 Notes = appointmentDto.Notes,
-                AppointmentStatus = AppointmentStatus.Scheduled
+                Status = AppointmentStatus.Scheduled
             };
 
             await _appointmentRepository.AddAsync(newAppointment);
@@ -106,7 +106,7 @@ public class AppointmentService : IAppointmentService
         }
 
         appointmentToUpdate.AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime();
-        appointmentToUpdate.AppointmentStatus = appointmentDto.Status;
+        appointmentToUpdate.Status = appointmentDto.Status;
         appointmentToUpdate.Notes = appointmentDto.Notes;
 
         await _appointmentRepository.UpdateAsync(appointmentToUpdate);
@@ -122,7 +122,7 @@ public class AppointmentService : IAppointmentService
             return new ApiResponse<AppointmentDto> { Success = false, Message = $"Agendamento com ID {id} não encontrado." };
         }
 
-        appointmentToCancel.AppointmentStatus = AppointmentStatus.Canceled;
+        appointmentToCancel.Status = AppointmentStatus.Canceled;
         await _appointmentRepository.UpdateAsync(appointmentToCancel);
         
         return new ApiResponse<AppointmentDto> { Data = MapAppointmentToDto(appointmentToCancel) };
@@ -153,7 +153,7 @@ public class AppointmentService : IAppointmentService
         var petDto = new PetDto(appointment.Pet.Id, appointment.Pet.Name, appointment.Pet.Breed, appointment.Pet.Specie, appointment.Pet.ClientId);
         var serviceDto = new ServiceDto(appointment.Service.Id, appointment.Service.Name, appointment.Service.Description, appointment.Service.Price, appointment.Service.DurationInMinutes);
 
-        return new AppointmentDto(appointment.Id, appointment.AppointmentDateTime, appointment.AppointmentStatus, appointment.Notes, clientDto, petDto, serviceDto);
+        return new AppointmentDto(appointment.Id, appointment.AppointmentDateTime, appointment.Status, appointment.Notes, clientDto, petDto, serviceDto);
     }
     
 }

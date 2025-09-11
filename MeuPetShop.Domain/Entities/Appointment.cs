@@ -6,7 +6,7 @@ public class Appointment
 {
     public int Id { get; set; }
     public DateTime AppointmentDateTime { get; set; }
-    public AppointmentStatus AppointmentStatus { get; set; }
+    public AppointmentStatus Status { get; set; }
     public string? Notes { get; set; }
     
     public int PetId { get; set; }
