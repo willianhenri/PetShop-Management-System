@@ -3725,11 +3725,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj",
+      "projectUniqueName": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj",
       "projectName": "MeuPetshop.Api",
-      "projectPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj",
+      "projectPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj",
       "packagesPath": "C:\\Users\\will\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\obj\\",
+      "outputPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\will\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3815,5 +3815,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.422/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

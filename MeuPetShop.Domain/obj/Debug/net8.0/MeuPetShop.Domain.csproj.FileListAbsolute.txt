@@ -36,6 +36,7 @@ C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\refint\MeuPetShop.Domain.dll
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\MeuPetShop.Domain.pdb
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\ref\MeuPetShop.Domain.dll
+<<<<<<< HEAD
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetShop.Domain\bin\Debug\net8.0\MeuPetShop.Domain.deps.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetShop.Domain\bin\Debug\net8.0\MeuPetShop.Domain.dll
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetShop.Domain\bin\Debug\net8.0\MeuPetShop.Domain.pdb
@@ -62,3 +63,5 @@ C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetShop.Domain\obj\De
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\refint\MeuPetShop.Domain.dll
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\MeuPetShop.Domain.pdb
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetShop.Domain\obj\Debug\net8.0\ref\MeuPetShop.Domain.dll
+=======
+>>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5

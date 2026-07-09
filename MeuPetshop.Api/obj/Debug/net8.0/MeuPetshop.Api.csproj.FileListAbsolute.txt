@@ -381,6 +381,7 @@ C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net8.0\MeuPetshop.Api.pdb
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net8.0\MeuPetshop.Api.genruntimeconfig.cache
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net8.0\ref\MeuPetshop.Api.dll
+<<<<<<< HEAD
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Api\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Api\bin\Debug\net8.0\appsettings.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Api\bin\Debug\net8.0\MeuPetshop.Api.exe
@@ -650,3 +651,5 @@ C:\Users\will\Desktop\PetShop\PetShop-Management-System\meupetshop.api\obj\Debug
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\meupetshop.api\obj\Debug\net8.0\MeuPetshop.Api.pdb
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net8.0\MeuPetshop.Api.genruntimeconfig.cache
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Api\obj\Debug\net8.0\ref\MeuPetshop.Api.dll
+=======
+>>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5

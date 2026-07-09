@@ -52,6 +52,7 @@ C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Infrastructure\ob
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\MeuPetshop.Infrastructure.pdb
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\MeuPetshop.Infrastructure.genruntimeconfig.cache
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\ref\MeuPetshop.Infrastructure.dll
+<<<<<<< HEAD
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Infrastructure\bin\Debug\net8.0\MeuPetshop.Infrastructure.deps.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Infrastructure\bin\Debug\net8.0\MeuPetshop.Infrastructure.runtimeconfig.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Infrastructure\bin\Debug\net8.0\MeuPetshop.Infrastructure.dll
@@ -88,3 +89,5 @@ C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Infrastructur
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\MeuPetshop.Infrastructure.pdb
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\MeuPetshop.Infrastructure.genruntimeconfig.cache
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Infrastructure\obj\Debug\net8.0\ref\MeuPetshop.Infrastructure.dll
+=======
+>>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5

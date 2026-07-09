@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L9piZJZyL8Q=",
+  "dgSpecHash": "TxmHoeHwXWM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj",
+  "projectFilePath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\will\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\will\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
@@ -75,5 +75,12 @@
     "C:\\Users\\will\\.nuget\\packages\\system.text.json\\9.0.8\\system.text.json.9.0.8.nupkg.sha512",
     "C:\\Users\\will\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

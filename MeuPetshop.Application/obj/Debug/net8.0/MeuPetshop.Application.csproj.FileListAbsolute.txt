@@ -46,6 +46,7 @@ C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\D
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
 C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll
+<<<<<<< HEAD
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.deps.json
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.dll
 C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.pdb
@@ -78,3 +79,5 @@ C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\o
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
 C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll
+=======
+>>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5

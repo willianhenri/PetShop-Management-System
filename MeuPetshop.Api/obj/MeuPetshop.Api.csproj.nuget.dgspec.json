@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj": {}
+    "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj": {
+    "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj",
+        "projectUniqueName": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj",
         "projectName": "MeuPetshop.Api",
-        "projectPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\MeuPetshop.Api.csproj",
+        "projectPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\MeuPetshop.Api.csproj",
         "packagesPath": "C:\\Users\\will\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\meupetshop.api\\obj\\",
+        "outputPath": "C:\\Users\\will\\Desktop\\PetShop\\PetShop-Management-System\\MeuPetshop.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\will\\AppData\\Roaming\\NuGet\\NuGet.Config"
