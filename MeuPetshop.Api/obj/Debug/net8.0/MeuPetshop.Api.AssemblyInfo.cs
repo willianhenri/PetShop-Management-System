@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MeuPetshop.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65cd2bc725b404b03b1cd3458143d53c58c7a563")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+248d46d817d0039ceff481cbf44bdcb08a87ba2f")]
 [assembly: System.Reflection.AssemblyProductAttribute("MeuPetshop.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MeuPetshop.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
