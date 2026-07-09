@@ -161,7 +161,7 @@ public class AuthController : ControllerBase
         var to = new EmailAddress(user.Email, user.FullName);
 
        
-        var resetLink = $"http://localhost:5173/reset-password?token={Uri.EscapeDataString(resetToken)}&email={user.Email}";
+        var resetLink = $"https://pet-shop-front-ecru.vercel.app/reset-password?token={Uri.EscapeDataString(resetToken)}&email={user.Email}";
         
        
         var plainTextContent = $"Clique no link para redefinir sua senha: {resetLink}";
