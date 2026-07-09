@@ -9,6 +9,8 @@ using System;
 using System.Linq;
 using MeuPetShop.Domain.Dtos.Auth;
 using MeuPetShop.Domain.Entities.User;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace MeuPetshop.Api.Controllers;
 
@@ -125,5 +127,54 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    [HttpPost("forgot-password")]
+    
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
+    {
+       
+        var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+        
+        if (user == null)
+        {
+           
+            return Ok(new { Message = "Se o e-mail existir em nossa base, um token de recuperação será enviado." });
+        }
+
+       
+        var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        
+        var apiKey = _configuration["SendGrid:ApiKey"];
+        var client = new SendGridClient(apiKey);
+
+        
+        var from = new EmailAddress("willian.h1227@gmail.com", "Meu PetShop");
+        var subject = "Redefinição de Senha - Meu PetShop";
+        
+       
+        var to = new EmailAddress(user.Email, user.FullName);
+
+       
+        var resetLink = $"http://localhost:5173/reset-password?token={Uri.EscapeDataString(resetToken)}&email={user.Email}";
+        
+       
+        var plainTextContent = $"Clique no link para redefinir sua senha: {resetLink}";
+        var htmlContent = $"<h2>Recuperação de Senha</h2><p>Olá {user.FullName},</p><p>Para escolher uma nova senha, clique no link abaixo:</p><p><strong><a href='{resetLink}'>Redefinir minha senha</a></strong></p><p>Se não solicitou esta alteração, pode ignorar este e-mail.</p>";
+        
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+        
+        
+        var response = await client.SendEmailAsync(msg);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return Ok(new { Message = "Se o e-mail existir em nossa base, um token de recuperação será enviado." });
+        }
+        else
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao tentar enviar o e-mail de recuperação." });
+        }
     }
 }

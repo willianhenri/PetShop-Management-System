@@ -30,3 +30,51 @@ C:\Users\wh341\Documents\estudos\MeuPetshop\MeuPetshop.Application\obj\Debug\net
 C:\Users\wh341\Documents\estudos\MeuPetshop\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
 C:\Users\wh341\Documents\estudos\MeuPetshop\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
 C:\Users\wh341\Documents\estudos\MeuPetshop\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.deps.json
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.dll
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.AssemblyReference.cache
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfoInputs.cache
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfo.cs
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.CoreCompileInputs.cache
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.sourcelink.json
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetsh.694D58C3.Up2Date
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.deps.json
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.dll
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.AssemblyReference.cache
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfoInputs.cache
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfo.cs
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.CoreCompileInputs.cache
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.sourcelink.json
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetsh.694D58C3.Up2Date
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\API\PetShop-Management-System - Copia\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.deps.json
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.dll
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\bin\Debug\net8.0\MeuPetShop.Domain.pdb
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.AssemblyReference.cache
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfoInputs.cache
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.AssemblyInfo.cs
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.csproj.CoreCompileInputs.cache
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.sourcelink.json
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetsh.694D58C3.Up2Date
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.dll
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\refint\MeuPetshop.Application.dll
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\MeuPetshop.Application.pdb
+C:\Users\will\Desktop\PetShop\PetShop-Management-System\MeuPetshop.Application\obj\Debug\net8.0\ref\MeuPetshop.Application.dll

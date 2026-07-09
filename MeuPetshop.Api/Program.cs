@@ -34,7 +34,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
         options.Password.RequireLowercase = false;
     })
     .AddRoles<IdentityRole>() 
-    .AddEntityFrameworkStores<AppDbContext>();
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration["ApiSettings:Secret"]);
 
