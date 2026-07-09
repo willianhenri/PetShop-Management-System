@@ -9,13 +9,10 @@ using System;
 using System.Linq;
 using MeuPetShop.Domain.Dtos.Auth;
 using MeuPetShop.Domain.Entities.User;
-<<<<<<< HEAD
 using SendGrid;
 using SendGrid.Helpers.Mail;
-=======
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
->>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5
 
 namespace MeuPetshop.Api.Controllers;
 
@@ -136,7 +133,6 @@ public class AuthController : ControllerBase
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-<<<<<<< HEAD
     [HttpPost("forgot-password")]
     
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPasswordDto)
@@ -184,7 +180,7 @@ public class AuthController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao tentar enviar o e-mail de recuperação." });
         }
-=======
+    }
     [HttpGet]
     [Authorize(Roles = "Admin")] 
     public async Task<IActionResult> GetAllUsers()
@@ -257,6 +253,6 @@ public class AuthController : ControllerBase
         }
 
         return Ok(new { Message = "Usuário excluído com sucesso!" });
->>>>>>> d8b289bfa6ef579d6df09abe9c3856b11e57e4a5
     }
+    
 }
