@@ -9,11 +9,14 @@ using System;
 using System.Linq;
 using MeuPetShop.Domain.Dtos.Auth;
 using MeuPetShop.Domain.Entities.User;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeuPetshop.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
 public class AuthController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -31,6 +34,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
         var userExists = await _userManager.FindByNameAsync(registerDto.UserName);
@@ -125,5 +129,79 @@ public class AuthController : ControllerBase
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    [HttpGet]
+    [Authorize(Roles = "Admin")] 
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = _userManager.Users.ToList();
+
+        
+        var userList = users.Select(user => new
+        {
+            user.Id,
+            user.UserName,
+            user.Email,
+            user.FullName,
+            user.IsActive,
+            user.CreatedAt
+        }).ToList();
+
+        return Ok(userList);
+    }
+
+    [HttpGet("{UserName}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetUserByUserName(string UserName)
+    {
+        var user = await _userManager.FindByNameAsync(UserName);
+        if (user == null)
+        {
+            return NotFound(new { Message = "Usuário não encontrado." });
+        }
+
+        var userDetails = new
+        {
+            user.Id,
+            user.UserName,
+            user.Email,
+            user.FullName,
+            user.IsActive,
+            user.CreatedAt
+        };
+
+        return Ok(userDetails);
+    }
+
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")] 
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        
+        var user = await _userManager.FindByIdAsync(id);
+        
+        if (user == null)
+        {
+            return NotFound(new { Message = "Usuário não encontrado." });
+        }
+
+       
+        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (user.Id == currentUserId)
+        {
+            return BadRequest(new { Message = "Você não pode excluir sua própria conta." });
+        }
+
+       
+        var result = await _userManager.DeleteAsync(user);
+
+        if (!result.Succeeded)
+        {
+            var errors = result.Errors.Select(e => e.Description).ToList();
+            return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao excluir usuário.", Errors = errors });
+        }
+
+        return Ok(new { Message = "Usuário excluído com sucesso!" });
     }
 }

@@ -9,7 +9,7 @@ namespace MeuPetshop.Api.Controllers;
 
 [ApiController]
 [Route("api/appointments")]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class AppointmentsController : Controller
 {
      private readonly IAppointmentService _appointmentService;
