@@ -210,23 +210,27 @@ public class AuthController : ControllerBase
 
 
     [HttpGet]
-    [Authorize(Roles = "Admin")] 
+    [Authorize(Roles = "SuperAdmin")] // 🔒 Apenas o dono supremo pode listar a equipe
     public async Task<IActionResult> GetAllUsers()
     {
         var users = _userManager.Users.ToList();
+        var userList = new List<object>();
+
+        foreach (var user in users)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            userList.Add(new
+            {
+                id = user.Id,
+                fullName = user.FullName,
+                username = user.UserName,
+                email = user.Email,
+                role = roles.FirstOrDefault() ?? "Funcionario"
+            });
+        }
 
         
-        var userList = users.Select(user => new
-        {
-            user.Id,
-            user.UserName,
-            user.Email,
-            user.FullName,
-            user.IsActive,
-            user.CreatedAt
-        }).ToList();
-
-        return Ok(userList);
+        return Ok(userList); 
     }
 
     [HttpGet("{UserName}")]
@@ -253,34 +257,29 @@ public class AuthController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")] 
+    [Authorize(Roles = "SuperAdmin")] 
     public async Task<IActionResult> DeleteUser(string id)
     {
-        
         var user = await _userManager.FindByIdAsync(id);
-        
         if (user == null)
         {
             return NotFound(new { Message = "Usuário não encontrado." });
         }
 
-       
-        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        var currentUserId = _userManager.GetUserId(User);
         if (user.Id == currentUserId)
         {
-            return BadRequest(new { Message = "Você não pode excluir sua própria conta." });
+            return BadRequest(new { Message = "Você não pode excluir sua própria conta administrativa." });
         }
 
-       
         var result = await _userManager.DeleteAsync(user);
-
-        if (!result.Succeeded)
+        if (result.Succeeded)
         {
-            var errors = result.Errors.Select(e => e.Description).ToList();
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao excluir usuário.", Errors = errors });
+            return Ok(new { Message = "Usuário removido com sucesso!" });
         }
 
-        return Ok(new { Message = "Usuário excluído com sucesso!" });
+        return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao deletar usuário." });
     }
     
 }
