@@ -27,7 +27,7 @@ public class ClientServices : IClientService
             Name = clientDto.Name,
             Email = clientDto.Email,
             Phone = clientDto.Phone,
-            Address = clientDto.Adress
+            Address = clientDto.Address
         };
         
         await _clientRepository.AddAsync(newClient);
@@ -73,7 +73,7 @@ public class ClientServices : IClientService
         clientToUpdate.Name = clientDto.Name;
         clientToUpdate.Email = clientDto.Email;
         clientToUpdate.Phone = clientDto.Phone;
-        clientToUpdate.Address = clientDto.Adress;
+        clientToUpdate.Address = clientDto.Address;
         await _clientRepository.UpdateAsync(clientToUpdate);
         return MapClientToDto(clientToUpdate);
     }
