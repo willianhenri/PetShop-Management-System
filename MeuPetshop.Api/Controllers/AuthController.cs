@@ -97,8 +97,10 @@ public class AuthController : ControllerBase
 
         if (user != null && user.IsActive && await _userManager.CheckPasswordAsync(user, loginDto.Password))
         {
+            var roles = await _userManager.GetRolesAsync(user);
+            var userRoles = roles.FirstOrDefault() ?? "Funcionario";
             var token = await GenerateJwtToken(user);
-            return Ok(new LoginResponseDto(token));
+            return Ok(new LoginResponseDto(token, userRoles));
         }
         
         return Unauthorized(new { Message = "Usuário ou senha inválidos."});
