@@ -70,26 +70,22 @@ public class AuthController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Falha ao criar usuário.", Errors = errors });
         }
 
-        string roleToAssign;
-    
-        if (registerDto.Email == "admin@petshop.com")
-        {
-            roleToAssign = "Admin";
-        }
-        else
-        {
-            roleToAssign = "Funcionario";
-        }
+        
+        string roleToAssign = !string.IsNullOrWhiteSpace(registerDto.Role) 
+            ? registerDto.Role 
+            : "Funcionario";
 
+       
         if (!await _roleManager.RoleExistsAsync(roleToAssign))
         {
             await _roleManager.CreateAsync(new IdentityRole(roleToAssign));
         }
-    
+
         await _userManager.AddToRoleAsync(user, roleToAssign);
 
         return Ok(new { Message = "Usuário criado com sucesso!" });
     }
+
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
