@@ -13,6 +13,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using MeuPetshop.Domain.Dtos;
 
 namespace MeuPetshop.Api.Controllers;
 
@@ -183,6 +184,33 @@ public class AuthController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao tentar enviar o e-mail de recuperação." });
         }
     }
+
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+    {
+        
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user == null)
+        {
+            return BadRequest("Usuário não encontrado.");
+        }
+
+        
+        var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.NewPassword);
+
+        
+        if (result.Succeeded)
+        {
+            return Ok("Senha alterada com sucesso!");
+        }
+
+        
+        var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+        return BadRequest(errors);
+    }
+
+
     [HttpGet]
     [Authorize(Roles = "Admin")] 
     public async Task<IActionResult> GetAllUsers()
