@@ -178,6 +178,8 @@ public class AuthController : ControllerBase
         }
         else
         {
+            var errorBody = await response.Body.ReadAsStringAsync();
+            Console.WriteLine($"ERRO SENDGRID: Status {response.StatusCode} - Detalhes: {errorBody}");
             return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Erro ao tentar enviar o e-mail de recuperação." });
         }
     }
