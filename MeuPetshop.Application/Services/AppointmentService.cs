@@ -48,7 +48,7 @@ public class AppointmentService : IAppointmentService
         };
     }
     
-    // Todos os métodos abaixo foram atualizados para retornar ApiResponse<T>
+    
     public async Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto)
     {
         try
