@@ -50,19 +50,4 @@
 
 ---
 
-# 🗺️ Roadmap e Melhorias Futuras
-### Este projeto está em constante evolução. Os próximos passos planejados são:
 
-### [ ] Desenvolvimento do Frontend: Criar a interface de usuário completa em React, Blazor ou Vue.js para consumir esta API e oferecer uma experiência de gerenciamento visual para os funcionários do petshop.
-
-### [ ] Melhoria de Endpoints:
-
-### Implementar um sistema de validação mais robusto com FluentValidation.
-
-### Refatorar a lógica de negócio para usar um padrão de Result em vez de exceções.
-
-### Criar endpoints para um Dashboard com estatísticas (ex: agendamentos do dia, faturamento, etc.).
-
-### [ ] Sistema de Notificações: Enviar e-mails de confirmação e lembrete para os clientes sobre seus agendamentos.
-
-### [ ] Cobertura de Testes: Escrever testes unitários e de integração para garantir a qualidade e a estabilidade do código.
