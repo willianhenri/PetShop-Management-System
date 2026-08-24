@@ -5,7 +5,7 @@ namespace MeuPetShop.Domain.Interfaces.IAppointment;
 
 public interface IAppointmentService
 {
-    Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto);
+   Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto, string applicationUserId);
     Task<ApiResponse<AppointmentDto>> GetAppointmentByIdAsync(int id);
     Task<PagedApiResponse<AppointmentDto>> FindAppointmentsByDateRangeAsync(DateTime startDate, DateTime endDate, int pageNumber, int pageSize);
     Task<ApiResponse<AppointmentDto>> UpdateAppointmentAsync(int id, UpdateAppointmentDto appointmentDto);

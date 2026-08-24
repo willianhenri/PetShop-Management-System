@@ -4,6 +4,7 @@ using MeuPetShop.Domain.Interfaces.IService;
 using MeuPetShop.Domain.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MeuPetshop.Api.Controllers;
 
@@ -44,7 +45,13 @@ public class AppointmentsController : Controller
     [HttpPost]
     public async Task<ActionResult<ApiResponse<AppointmentDto>>> CreateAppointment([FromBody] CreateAppointmentDto appointmentDto)
     {
-        var response = await _appointmentService.CreateAppointmentAsync(appointmentDto);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var response = await _appointmentService.CreateAppointmentAsync(appointmentDto, userId);
         if (!response.Success)
         {
             return BadRequest(response);

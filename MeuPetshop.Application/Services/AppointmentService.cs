@@ -49,7 +49,7 @@ public class AppointmentService : IAppointmentService
     }
     
     
-    public async Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto)
+    public async Task<ApiResponse<AppointmentDto>> CreateAppointmentAsync(CreateAppointmentDto appointmentDto, string applicationUserId)
     {
         try
         {
@@ -73,7 +73,8 @@ public class AppointmentService : IAppointmentService
                 ServiceId = appointmentDto.ServiceId,
                 AppointmentDateTime = appointmentDto.AppointmentDateTime.ToUniversalTime(),
                 Notes = appointmentDto.Notes,
-                Status = AppointmentStatus.Scheduled
+                Status = AppointmentStatus.Scheduled,
+                ApplicationUserId = applicationUserId
             };
 
             await _appointmentRepository.AddAsync(newAppointment);

@@ -8,7 +8,7 @@ namespace MeuPetshop.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
+
 public class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;
@@ -48,7 +48,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    
     public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] CreateProductDto productDto)
     {
         try
