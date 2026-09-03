@@ -52,7 +52,7 @@ public class ServicesController : ControllerBase
     }
     
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> DeleteService(int id)
     {
         var success = await _serviceService.DeleteServiceAsync(id);

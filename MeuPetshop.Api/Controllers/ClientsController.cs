@@ -67,7 +67,7 @@ public class ClientsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> DeleteClient(int id)
     {
         var success = await _clientService.DeleteClientAsync(id);

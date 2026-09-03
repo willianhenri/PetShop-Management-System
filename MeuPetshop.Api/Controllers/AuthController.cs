@@ -37,7 +37,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
         var userExists = await _userManager.FindByNameAsync(registerDto.UserName);
@@ -210,7 +210,7 @@ public class AuthController : ControllerBase
 
 
     [HttpGet]
-    [Authorize(Roles = "SuperAdmin")] // 🔒 Apenas o dono supremo pode listar a equipe
+    [Authorize(Roles = "SuperAdmin")] 
     public async Task<IActionResult> GetAllUsers()
     {
         var users = _userManager.Users.ToList();
@@ -234,7 +234,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("{UserName}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public async Task<IActionResult> GetUserByUserName(string UserName)
     {
         var user = await _userManager.FindByNameAsync(UserName);

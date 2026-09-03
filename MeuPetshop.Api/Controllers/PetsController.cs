@@ -81,7 +81,7 @@ public class PetsController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public async Task<IActionResult> DeletePet(int id)
     {
         var success = await _petService.DeletePetAsync(id);
